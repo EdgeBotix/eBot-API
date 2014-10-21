@@ -1,7 +1,8 @@
 from time import *
 import os
 import sys
-import serial
+from serial import Serial
+#import serial
 import glob
 from Tkinter import *
 import tkMessageBox
@@ -75,14 +76,14 @@ class eBot:
         ebot_names = []
         for port in ports:
             try:
-                s = serial.Serial(port, baudRate, timeout=1.0, writeTimeout=1.0)
+                s = Serial(port, baudRate, timeout=1.0, writeTimeout=1.0)
                 s._timeout = 1.0
                 s._writeTimeout = 1.0
-                try:
-                    s.open()
-                except:
-                    continue
-                s.write("?")
+                #try:
+                #    s.open()
+                #except:
+                #    continue
+                s.write("<<1?")
                 sleep(0.5)
                 line = s.readline()
                 if (line[:4] == "eBot"):
@@ -123,7 +124,7 @@ class eBot:
             self.port.write('<<1E')
             sleep(0.4)
             line = self.port.readline()
-            if (line != ">>1B\n" or line != ">>1B"):
+            if (line != ">>1B\n" and line != ">>1B"):
                 self.lostConnection()
             self.port.write("EEEO")
             sleep(0.4)
@@ -139,7 +140,9 @@ class eBot:
 
         self.serialReady = True
 
+    #TODO: add disconnect feedback to robot
     def disconnect(self):
+        self.halt()
         if self.serialReady:
             try:
                 self.port.close()
@@ -173,7 +176,7 @@ class eBot:
                 self.port.write("2H")
             except:
                 self.lostConnection()
-        self.Led_off()
+        self.led_off()
 
     def led(self, bool):
         if (bool == 1):
