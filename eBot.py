@@ -18,7 +18,7 @@ class eBot:
 
 
     def __init__(self):
-        self.sonarValues = [0, 0, 0, 0, 0, 0, 0, 0]
+        self.sonarValues = [0, 0, 0, 0, 0, 0]
         self.port = None
         self.serialReady = False
 
@@ -52,6 +52,9 @@ class eBot:
             if 'BthModem' in port[1][8:] or 'VCP' in port[1][8:] or 'ProlificSerial'in port[1][8:]:
                 devicePorts.append( (int(port[0][3:]) - 1))
         return devicePorts
+
+    def open(self):
+        self.connect()
 
     def connect(self):
         baudRate = 115200
@@ -140,6 +143,9 @@ class eBot:
 
         self.serialReady = True
 
+    def close(self):
+        self.disconnect()
+
     #TODO: add disconnect feedback to robot
     def disconnect(self):
         self.halt()
@@ -158,17 +164,15 @@ class eBot:
                 self.port.write("2S")
             except:
                 self.lostConnection()
-        sleep(0.2)
         line = self.port.readline()
         values = line.split(";")
-        self.sonarValues[4] = float(values[0]) / 10
-        self.sonarValues[3] = float(values[1]) / 10
-        self.sonarValues[2] = float(values[2]) / 10
-        self.sonarValues[1] = float(values[3]) / 10
-        self.sonarValues[0] = float(values[4]) / 10
-        self.sonarValues[5] = float(values[5]) / 10
+        self.sonarValues[4] = float(values[0]) / 1000
+        self.sonarValues[3] = float(values[1]) / 1000
+        self.sonarValues[2] = float(values[2]) / 1000
+        self.sonarValues[1] = float(values[3]) / 1000
+        self.sonarValues[0] = float(values[4]) / 1000
+        self.sonarValues[5] = float(values[5]) / 1000
         return self.sonarValues
-
 
     def halt(self):
         if self.serialReady:
@@ -193,14 +197,12 @@ class eBot:
             except:
                 self.lostConnection()
 
-
     def led_off(self):
         if self.serialReady:
             try:
                 self.port.write("2l")
             except:
                 self.lostConnection()
-
 
     def light(self):
         """
@@ -211,13 +213,11 @@ class eBot:
                 self.port.write("2D")
             except:
                 self.lostConnection()
-        sleep(0.2)
         line = self.port.readline()
         values = line.split(";")
         float(values[0])
         float(values[1])
         return values
-
 
     #Double check true vs. false
     def obstacle(self):
@@ -226,9 +226,9 @@ class eBot:
                 self.port.write("2O")
             except:
                 self.lostConnection()
-        sleep(0.2)
         line = self.port.readline()
-        return line
+        return bool(int(line[0]))
+#        return bool(line[0])
 
     #TODO: implement x, y, z returns and a seperate odometry function
     def acceleration(self):
@@ -237,7 +237,6 @@ class eBot:
                 self.port.write("2A")
             except:
                 self.lostConnection()
-        sleep(0.2)
         line = self.port.readline()
         values = line.split(";")
         float(values[0])
@@ -260,12 +259,10 @@ class eBot:
             self.serialReady = False
             raise Exception ("Could not close COM port.")
 
-
     #TODO: Add com port argument functionality
     #Still under development, currently just calls connect
     def port_open(self):
         self.connect()
-
 
     def wheels(self, LS, RS):
         Left_speed = int((LS + 2) * 100)
