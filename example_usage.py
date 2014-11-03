@@ -8,7 +8,6 @@ myvalue = [0, 0, 0, 0, 0, 0]
 myEBot.halt()
 
 sleep(1)
-obs = myEBot.obstacle()
 
 myEBot.led(1)
 sleep(1)

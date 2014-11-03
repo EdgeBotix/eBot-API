@@ -167,14 +167,15 @@ class eBot:
             except:
                 self.lostConnection()
         line = self.port.readline()
-        while len(line) < 25:
+        values = line.split(";")
+        while len(values) < 7:
             if self.serialReady:
                 try:
                     self.port.write("2S")
                 except:
                     self.lostConnection()
             line = self.port.readline()
-        values = line.split(";")
+            values = line.split(";")
         self.sonarValues[4] = float(values[0]) / 1000
         self.sonarValues[3] = float(values[1]) / 1000
         self.sonarValues[2] = float(values[2]) / 1000
