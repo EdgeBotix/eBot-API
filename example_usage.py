@@ -11,27 +11,27 @@ myEBot.halt()
 sleep(1)
 obs = myEBot.obstacle()
 
-myEBot.led(1)
-sleep(1)
-myEBot.led(0)
-sleep(0.5)
-myEBot.led(1)
-
-myEBot.wheels(.2,.2)
-sleep(2)
-myEBot.halt()
-sleep(1)
-myEBot.wheels(.1,.1)
+#myEBot.led(1)
+#sleep(1)
+#myEBot.led(0)
+#sleep(0.5)
+#myEBot.led(1)
+#myEBot.wheels(.2,.2)
 #sleep(2)
-#myEBot.wheels(-1,-1)
+#myEBot.close()
+#sleep(1)
+#myEBot.open()
+#sleep(1)
+#myEBot.wheels(.2,.2)
 #sleep(2)
-#myEBot.halt    ()
+#myEBot.halt()
+#sleep(1)
 while True:
     myvalue = myEBot.robot_uS()
 
-    if myvalue[2] < 0.300:
-        myEBot.halt()
-    else:
-        myEBot.wheels(1,1)
-    #print myvalue
+    #if myvalue[2] < 0.300:
+    #   myEBot.halt()
+    #else:
+    #   myEBot.wheels(1,1)
+    print myvalue
 myEBot.disconnect()

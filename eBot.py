@@ -2,7 +2,7 @@ from time import *
 import os
 import sys
 from serial import Serial
-#import serial
+# import serial
 import glob
 from Tkinter import *
 import tkMessageBox
@@ -14,9 +14,8 @@ if os.name == 'nt':
     except:
         pass
 
+
 class eBot:
-
-
     def __init__(self):
         self.sonarValues = [0, 0, 0, 0, 0, 0]
         self.port = None
@@ -39,7 +38,7 @@ class eBot:
         for i in range(256):
             try:
                 val = winreg.EnumValue(key, i)
-                port = (str(val[1]) , str(val[0]))
+                port = (str(val[1]), str(val[0]))
                 ports.append(port)
             except Exception:
                 winreg.CloseKey(key)
@@ -49,8 +48,8 @@ class eBot:
         devicePorts = []
         for port in ports:
             #Just because it is formatted that way...
-            if 'BthModem' in port[1][8:] or 'VCP' in port[1][8:] or 'ProlificSerial'in port[1][8:]:
-                devicePorts.append( (int(port[0][3:]) - 1))
+            if 'BthModem' in port[1][8:] or 'VCP' in port[1][8:] or 'ProlificSerial' in port[1][8:]:
+                devicePorts.append((int(port[0][3:]) - 1))
         return devicePorts
 
     def open(self):
@@ -101,7 +100,7 @@ class eBot:
                     self.port.flushOutput()
                     break
                     #s.close()
-#                    self.
+                #                    self.
             except:
                 try:
                     if s.isOpen():
@@ -117,7 +116,8 @@ class eBot:
             #sys.stderr.write("Could not open serial port.  Is robot turned on and connected?\n")
             window = Tkinter.Tk()
             window.wm_withdraw()
-            tkMessageBox.showwarning( "Connection Error", "No eBot found. Please reconnect and try again.", parent=window)
+            tkMessageBox.showwarning("Connection Error", "No eBot found. Please reconnect and try again.",
+                                     parent=window)
             #import ctypes  # An included library with Python install.
             #ctypes.windll.user32.MessageBoxA(0, "Your text", "Your title", 1)
             raise Exception("No eBot found")
@@ -132,11 +132,13 @@ class eBot:
             self.port.write("EEEO")
             sleep(0.4)
             self.port.write("F")
-
+            sleep(0.2)
+            self.port.flushInput()
+            self.port.flushOutput()
         except:
             window = Tkinter.Tk()
             window.wm_withdraw()
-            tkMessageBox.showerror( "COM Error", "Robot connection lost...", parent=window)
+            tkMessageBox.showerror("COM Error", "Robot connection lost...", parent=window)
             sys.stderr.write("Could not write to serial port.\n")
             self.serialReady = False
             sys.stderr.write("Robot turned off or no longer connected.\n")
@@ -154,7 +156,7 @@ class eBot:
                 self.port.close()
                 window = Tkinter.Tk()
                 window.wm_withdraw()
-                tkMessageBox.showinfo ( "Successful", "eBot successfully disconnected.", parent=window)
+                tkMessageBox.showinfo("Successful", "eBot successfully disconnected.", parent=window)
             except:
                 self.lostConnection()
 
@@ -165,6 +167,13 @@ class eBot:
             except:
                 self.lostConnection()
         line = self.port.readline()
+        while len(line) < 25:
+            if self.serialReady:
+                try:
+                    self.port.write("2S")
+                except:
+                    self.lostConnection()
+            line = self.port.readline()
         values = line.split(";")
         self.sonarValues[4] = float(values[0]) / 1000
         self.sonarValues[3] = float(values[1]) / 1000
@@ -228,7 +237,8 @@ class eBot:
                 self.lostConnection()
         line = self.port.readline()
         return bool(int(line[0]))
-#        return bool(line[0])
+
+    #        return bool(line[0])
 
     #TODO: implement x, y, z returns and a seperate odometry function
     def acceleration(self):
@@ -257,7 +267,7 @@ class eBot:
             self.port.close()
         except:
             self.serialReady = False
-            raise Exception ("Could not close COM port.")
+            raise Exception("Could not close COM port.")
 
     #TODO: Add com port argument functionality
     #Still under development, currently just calls connect
@@ -276,9 +286,9 @@ class eBot:
             except:
                 self.lostConnection()
 
-        # class ebot_f:
+                # class ebot_f:
 
-        # def __init__(self):
+                # def __init__(self):
 
     def lostConnection(self):
         try:
@@ -288,6 +298,6 @@ class eBot:
         self.serialReady = False
         window = Tkinter.Tk()
         window.wm_withdraw()
-        tkMessageBox.showerror( "COM Error", "Robot connection lost...", parent=window)
+        tkMessageBox.showerror("COM Error", "Robot connection lost...", parent=window)
         raise Exception("Robot Connection Lost")
         ################################################################################
