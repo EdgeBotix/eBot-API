@@ -28,7 +28,7 @@ Getting Started with eBot
 
 eBots are a robust, 3D-printed versatile STEM learning robotics platform that provide modularity and customization options. eBots aim to bridge the link between theory and practice by providing the ideal platform for students to collaborate and use their combined knowledge to build the best solution to a task. EdgeBotix wants to build the best supporting community and provide resources for teaching, making it extremely easy to integrate into the curriculum, something not seen in current educational robots.  
 
-***Technical Specifications***
+### Technical Specification
 
 The following are detailed technical specifications of the eBots:
 *	**Physical robot**
@@ -65,45 +65,46 @@ The following are detailed technical specifications of the eBots:
     *	eOS Running onboard eBots (an RTOS built on the mbed RTOS)
 *	**Interface**
     * Currently there are two interface with python language
-        *   Soar interface 
-        *   API interface
+        *   [Soar Interface](#soar) 
+        *   [API interface](#features)
 
-### Editors & IDEs
+### Pairing eBOT
+* eBot could be paired by entering the pairing code "0000". If you want the step by step guide of pairing with your system you can click [here](#detailed pairing).
 
-*   **Vim** by [me](https://github.com/altercation) (the Vim-only portion of Solarized is
-    [available here](https://github.com/altercation/vim-colors-solarized), for use with
-    Pathogen, etc.). See also the [Vim README](http://ethanschoonover.com/solarized/vim-colors-solarized).
-*   **Emacs** courtesy of [Greg Pfeil](http://blog.technomadic.org)
-    ([@sellout](http://twitter.com/sellout))
-    in the main repo and in a [standalone repository][Emacs Repository]
-*   **IntelliJ IDEA**
-    courtesy of [Johan Kaving](https://github.com/jkaving) and
-    ([@flangy](http://twitter.com/flangy))
-    in the main repo and in a [standalone repository][IntelliJ Repository]
-*   **NetBeans** courtesy of [Brian Fenton](https://github.com/fentie) and
-    in the main repo and in a [standalone repository][NetBeans Repository]
-*   **SeeStyle theme for Coda & SubEthaEdit** courtesy of
-    [Justin Hileman](http://justinhileman.com/)
-    ([@bobthecow](http://twitter.com/bobthecow)),
-    in the main repo and in a
-    [standalone repository][SeeStyle-Coda-SubEthaEdit Repository]
-*   **TextMate** --- ***NOTE:*** Dark Theme is work in progress\
-    courtesy of [Tom Martin](http://thedeplorableword.net/)
-    ([@deplorableword](http://twitter.com/deplorableword))
-    in the main repo and in a [standalone repository][TextMate Repository]
-    (with key work from [Mark Story](http://mark-story.com)
-    and [Brian Mathiyakom](http://brian.rarevisions.net))
-*   **TextWrangler & BBEdit** courtesy of [Rui Carmo](http://the.taoofmac.com)
-    ([@taoofmac](http://twitter.com/taoofmac))
-    in the main repo and in a [standalone repository][TextWrangler-BBEdit Repository]
-*   **Visual Studio** courtesy of [David Thibault](http://www.leddt.com)
-    ([@leddt](http://twitter.com/leddt))
-    in the main repo and in a [standalone repository][Visual Studio Repository]
+### Python Installation
+You might need:
+* [Python 2.7](http://epd-free.enthought.com/?Download=Download+EPD+Free+7.3-2) 
 
-*   **Xcode** work in progress ports are available for [Xcode 3] and [Xcode 4]
-    and will be pulled into the main Solarized project soon.
+Soar
+---------
+This section assumes that you have Python 2.7 already installed. 
+To install Digital World Library, follow the steps according to your platform:
+1.	OS X and Linux:
+   * Download Soar-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
+   * Open Terminal
+   * Go the directory/folder where you save the file, e.g. if you save it to Mac's default Downloads folder, then type :
+   ```
+     cd $HOME/Downloads
+    ```
+   * Unzip the file, e.g. type :
+      tar Soar-master.zip
+   * Go to the eBotDemo folder, e.g. type:
+      cd eBotDemo
+   * Go to the makedist folder, e.g. type:
+      cd makedist  
+   * Install the library by typing:
+      sudo python setup.py install
 
-### Terminal Emulators
+2.	Windows:
+https://www.dropbox.com/s/upqekmda24av9kt/eBotDemo.zip
+   * Download eBotDemo.zip from the URL given above
+   * Unzip the file using 7-Zip (download from URL above)
+   * Open Command Prompt by typing "cmd" from the Start Menu
+   * Go the directory/folder where you have unzipped the file, e.g. type :
+      cd C:\Downloads\eBotDemo\makedist
+   * Install the library by typing:
+      python setup.py install
+
 
 * **Xresources** / Xdefaults
 * **iTerm2**
@@ -444,7 +445,5 @@ background.
 [Xcode 3]: https://github.com/shayne/solarized/tree/master/apple-xcode3-solarized
 [Xcode 4]: https://github.com/brianmichel/solarized/tree/master/apple-xcode4-solarized
 [me]: http://ethanschoonover.com/colophon
-[changelog]: http://ethanschoonover.com/solarized/CHANGELOG
-[Vim README]: http://ethanschoonover.com/solarized/vim-colors-solarized
 [changelog]: http://ethanschoonover.com/solarized/CHANGELOG
 [Vim README]: http://ethanschoonover.com/solarized/vim-colors-solarized
