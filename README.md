@@ -83,17 +83,17 @@ To install Digital World Library, follow the steps according to your platform:
    * Download SOAR-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
    * Open Terminal
    * Go the directory/folder where you save the file, e.g. if you save it to Mac's default Downloads folder, then type :
-   ```
-     cd $HOME/Downloads
-    ```
+```
+    cd $HOME/Downloads
+```
    * Unzip the file, e.g. type :
-   ```
-      tar SOAR-master.zip
-   ```
+```
+    tar SOAR-master.zip
+```
    * Go to the SOAR-master folder, e.g. type:
-   ```    
+```    
    cd SOAR-master
-   ```
+```
    * Install the library by typing:
 ```   
    sudo python setup.py install
@@ -104,13 +104,12 @@ To install Digital World Library, follow the steps according to your platform:
    * Open Command Prompt by typing "cmd" from the Start Menu
    * Go the directory/folder where you have unzipped the file, e.g. type :
 ``` 
-      cd C:\Downloads\SOAR-master\
-   ``` 
-   * Install the library by typing:
-   ``` 
-      python setup.py install
+    cd C:\Downloads\SOAR-master\
 ``` 
-
+   * Install the library by typing:
+``` 
+   python setup.py install
+``` 
 
 ### RUNNING SIMULATOR - SOAR
 After you have installed the Digital World Library, you can run the
@@ -127,22 +126,23 @@ simulator, called SOAR. To run it, follow the steps below:
 2. Windows:
     * Open Command Prompt by typing "cmd" from the Start Menu
     * Go to the folder where you store Digital World Library, e.g.:
-    ``` 
+``` 
     cd C:\Downloads\SOAR-master\
-    ``` 
+```
     * Go to "soar" folder:
-``` 
+```
    cd soar
-   ``` 
+```
     * Run soar by typing:
-    ``` 
+```
     python runsoar.py
-``` 
+```
 
 ### USING SIMULATOR - SOAR
+
 1. Running the code and connect to eBot using wireless connection:
    * Run Soar 
-   * Click "Simulator" button to load any Python files for the "Worlds"
+   * Click "Simulator" button to load any Python files for the Worlds
    * Click "Brain" button and choose the Python files containing your robot brain
    * Click "START" button to start connection with EBot
 
