@@ -10,39 +10,63 @@ left- Bluetooth
 Centre- Charging
 Right-MCU
 ---
-title: Solarized
-description: Precision colors for machines and people
-author: Ethan Schoonover
-tags: test, testing, test123
-colors: light yellow
-created:  2011 Mar 15
-modified: 2011 Apr 16
+title: Getting started with eBot 
+description: eBot hardware and Soar code
+author: Abhishek Gupta, Harsh Bhatt
+tags: eBot, Soar, Edgebotix
+created:  2014 Oct 20
+modified: 2014 Nov 19
 
 ---
 
-Solarized
+Getting Started with eBot
 =========
 
-## Precision colors for machines and people
+## eBot Description
 
 [![solarized dualmode](https://github.com/altercation/solarized/raw/master/img/solarized-yinyang.png)](#features)
 
-Solarized is a sixteen color palette (eight monotones, eight accent colors)
-designed for use with terminal and gui applications. It has several [unique
-properties](#features). I designed this colorscheme with both precise
-[CIELAB](http://en.wikipedia.org/wiki/Lab_color_space) lightness relationships
-and a refined set of hues based on fixed color wheel relationships. It has been
-tested extensively in real world use on color calibrated displays (as well as
-uncalibrated/intentionally miscalibrated displays) and in a variety of lighting
-conditions.
+eBots are a robust, 3D-printed versatile STEM learning robotics platform that provide modularity and customization options. eBots aim to bridge the link between theory and practice by providing the ideal platform for students to collaborate and use their combined knowledge to build the best solution to a task. EdgeBotix wants to build the best supporting community and provide resources for teaching, making it extremely easy to integrate into the curriculum, something not seen in current educational robots.  
 
-***See the [changelog] for what's new in the most recent release.***
+***Technical Specifications***
 
-![solarized palette](https://github.com/altercation/solarized/raw/master/img/solarized-palette.png)
-
-![solarized vim](https://github.com/altercation/solarized/raw/master/img/solarized-vim.png)
-
-Currently available in formats for (cf [screenshots](#screenshots) below):
+The following are detailed technical specifications of the eBots:
+*	**Physical robot**
+    *	15 x 15 x 8 cm, ABS plastic housing with various colour options
+    *	Tank drive (2 drive treads)
+        *	Powered by 2 low current Tamiya DC brushed motors
+        *	150 RPM no load speed
+        *	.2 m/s average speed
+*	**Firmware**
+    *	Powered by an ARM Cortex M0 microprocessor running at 48 MHz
+*	**Sensors & other I/O**
+    *	6 Sonar range finders (15 cm to 3 m range)
+        *	1 Front facing
+        *	2 At 45° from front
+        *	2 Side facing
+        *	1 Back facing
+        *	Within 20 cm dead zone requirement
+    *	6 DOF IMU (Accelerometer & Gyroscope)
+        *	Raw acceleration data in x, y and z axis
+        *	Raw euler angle (rotation) along x, y and z axis
+    *	2 Encoders, providing distance and velocity measurements for both treads
+    *	2 LDRs
+        *	1 Top facing
+        *	1 Front facing
+    *	Onboard buzzer with a frequency range of 100 Hz to 10 KHz
+*	**Wireless communication**
+    *	Bluetooth connectivity to host computer
+        *	Each robot has unique serialized Bluetooth identifier, in accordance to the serial number labeled on robot body
+*	**Power**
+    *	2 Ah Li-Po battery providing 3+ hours of continuous runtime
+    *	Mini USB charging port
+        *	1 Hour full charge time
+*	**Software**
+    *	eOS Running onboard eBots (an RTOS built on the mbed RTOS)
+*	**Interface**
+    * Currently there are two interface with python language
+        *   Soar interface 
+        *   API interface
 
 ### Editors & IDEs
 
@@ -420,5 +444,7 @@ background.
 [Xcode 3]: https://github.com/shayne/solarized/tree/master/apple-xcode3-solarized
 [Xcode 4]: https://github.com/brianmichel/solarized/tree/master/apple-xcode4-solarized
 [me]: http://ethanschoonover.com/colophon
+[changelog]: http://ethanschoonover.com/solarized/CHANGELOG
+[Vim README]: http://ethanschoonover.com/solarized/vim-colors-solarized
 [changelog]: http://ethanschoonover.com/solarized/CHANGELOG
 [Vim README]: http://ethanschoonover.com/solarized/vim-colors-solarized
