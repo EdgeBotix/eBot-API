@@ -80,7 +80,7 @@ Soar
 This section assumes that you have Python 2.7 already installed. 
 To install Digital World Library, follow the steps according to your platform:
 
-* OS X and Linux:
+**OS X and Linux:**
    * Download SOAR-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
    * Open Terminal
    * Go the directory/folder where you save the file, e.g. if you save it to Mac's default Downloads folder, then type :
@@ -100,11 +100,11 @@ To install Digital World Library, follow the steps according to your platform:
    sudo python setup.py install
 ```
 
-* Windows:
-    * Download SOAR-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
-   * Unzip the file
-   * Open Command Prompt by typing "cmd" from the Start Menu
-   * Go the directory/folder where you have unzipped the file, e.g. type :
+**Windows:**
+* Download SOAR-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
+* Unzip the file
+* Open Command Prompt by typing "cmd" from the Start Menu
+* Go the directory/folder where you have unzipped the file, e.g. type :
 ``` 
     cd C:\Downloads\SOAR-master\
 ``` 
@@ -117,7 +117,7 @@ To install Digital World Library, follow the steps according to your platform:
 After you have installed the Digital World Library, you can run the
 simulator, called SOAR. To run it, follow the steps below:
 
-* OS X and Linux:
+**OS X and Linux:**
    * Open Terminal
    * Go to the SOAR-master folder
    * Go to soar folder
@@ -125,9 +125,9 @@ simulator, called SOAR. To run it, follow the steps below:
 ``` 
 	python runsoar.py
 ``` 
-* Windows:
-    * Open Command Prompt by typing "cmd" from the Start Menu
-    * Go to the folder where you store Digital World Library, e.g.:
+**Windows:**
+* Open Command Prompt by typing "cmd" from the Start Menu
+* Go to the folder where you store Digital World Library, e.g.:
 ``` 
     cd C:\Downloads\SOAR-master\
 ```
