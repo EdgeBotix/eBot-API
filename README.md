@@ -18,6 +18,14 @@ created:  2014 Oct 20
 modified: 2014 Nov 19
 
 ---
+title: Getting started with eBot 
+description: eBot hardware and Soar code
+author: Abhishek Gupta, Harsh Bhatt
+tags: eBot, Soar, Edgebotix
+created:  2014 Oct 20
+modified: 2014 Nov 19
+
+---
 
 Getting Started with eBot
 =========
@@ -68,7 +76,7 @@ The following are detailed technical specifications of the eBots:
         *   [Soar Interface](#soar) 
         *   [API interface](#features)
 
-### Pairing eBOT
+### Pairing eBot
 * eBot could be paired by entering the pairing code "0000". If you want the step by step guide of pairing with your system you can click [here](#detailed pairing).
 
 ### Python Installation
@@ -80,31 +88,79 @@ Soar
 This section assumes that you have Python 2.7 already installed. 
 To install Digital World Library, follow the steps according to your platform:
 1.	OS X and Linux:
-   * Download Soar-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
+   * Download SOAR-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
    * Open Terminal
    * Go the directory/folder where you save the file, e.g. if you save it to Mac's default Downloads folder, then type :
    ```
      cd $HOME/Downloads
     ```
    * Unzip the file, e.g. type :
-      tar Soar-master.zip
-   * Go to the eBotDemo folder, e.g. type:
-      cd eBotDemo
-   * Go to the makedist folder, e.g. type:
-      cd makedist  
+   ```
+      tar SOAR-master.zip
+   ```
+   * Go to the SOAR-master folder, e.g. type:
+```    
+  cd SOAR-master
+   ```
    * Install the library by typing:
-      sudo python setup.py install
-
+```   
+   sudo python setup.py install
+```
 2.	Windows:
-https://www.dropbox.com/s/upqekmda24av9kt/eBotDemo.zip
-   * Download eBotDemo.zip from the URL given above
-   * Unzip the file using 7-Zip (download from URL above)
+    * Download SOAR-master.zip from the [github](https://github.com/EdgeBotix/SOAR)
+   * Unzip the file
    * Open Command Prompt by typing "cmd" from the Start Menu
    * Go the directory/folder where you have unzipped the file, e.g. type :
-      cd C:\Downloads\eBotDemo\makedist
+``` 
+      cd C:\Downloads\SOAR-master\
+   ``` 
    * Install the library by typing:
+   ``` 
       python setup.py install
+``` 
 
+
+### RUNNING SIMULATOR - SOAR
+After you have installed the Digital World Library, you can run the
+simulator, called SOAR. To run it, follow the steps below:
+1. OS X and Linux:
+   * Open Terminal
+   * Go to the SOAR-master folder
+   * Go to soar folder
+   * Run soar by typing: 
+``` 
+	python runsoar.py
+``` 
+
+2. Windows:
+    * Open Command Prompt by typing "cmd" from the Start Menu
+    * Go to the folder where you store Digital World Library, e.g.:
+    ``` 
+    cd C:\Downloads\SOAR-master\
+    ``` 
+    * Go to "soar" folder:
+``` 
+   cd soar
+   ``` 
+    * Run soar by typing:
+    ``` 
+    python runsoar.py
+``` 
+
+### USING SIMULATOR - SOAR
+1. Running the code and connect to eBot using wireless connection:
+   * Run Soar 
+   * Click "Simulator" button to load any Python files for the "Worlds"
+   * Click "Brain" button and choose the Python files containing your robot brain
+   * Click "START" button to start connection with EBot
+
+WORLD
+
+Some World files for simulation has been created ans it is part of the Digital Library Package. It is also included in this package under the folder "worlds".
+
+BRAIN
+
+A simple Brain file has been included: brainfile.py.
 
 * **Xresources** / Xdefaults
 * **iTerm2**
