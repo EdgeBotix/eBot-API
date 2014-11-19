@@ -129,11 +129,11 @@ simulator, called SOAR. To run it, follow the steps below:
 ``` 
     cd C:\Downloads\SOAR-master\
 ```
-    * Go to "soar" folder:
+* Go to "soar" folder:
 ```
    cd soar
 ```
-    * Run soar by typing:
+* Run soar by typing:
 ```
     python runsoar.py
 ```
