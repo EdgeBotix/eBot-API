@@ -10,7 +10,7 @@ left- Bluetooth
 Centre- Charging
 Right-MCU
 ---
-title: Getting started with eBot 
+title: Getting started with eBot
 description: eBot hardware and Soar code
 author: Abhishek Gupta, Harsh Bhatt
 tags: eBot, Soar, Edgebotix
@@ -24,9 +24,9 @@ Getting Started with eBot
 
 ## eBot Description
 
-[![solarized dualmode](https://github.com/altercation/solarized/raw/master/img/solarized-yinyang.png)](#features)
+[![solarized dualmode](https://github.com/EdgeBotix/docs/blob/master/images/eBot-topview.jpg)](#features)
 
-eBots are a robust, 3D-printed versatile STEM learning robotics platform that provide modularity and customization options. eBots aim to bridge the link between theory and practice by providing the ideal platform for students to collaborate and use their combined knowledge to build the best solution to a task. EdgeBotix wants to build the best supporting community and provide resources for teaching, making it extremely easy to integrate into the curriculum, something not seen in current educational robots.  
+eBots are a robust, 3D-printed versatile STEM learning robotics platform that provide modularity and customization options. eBots aim to bridge the link between theory and practice by providing the ideal platform for students to collaborate and use their combined knowledge to build the best solution to a task. EdgeBotix wants to build the best supporting community and provide resources for teaching, making it extremely easy to integrate into the curriculum, something not seen in current educational robots.
 
 ### Technical Specification
 
@@ -65,7 +65,7 @@ The following are detailed technical specifications of the eBots:
     *	eOS Running onboard eBots (an RTOS built on the mbed RTOS)
 *	**Interface**
     * Currently there are two interface with python language
-        *   [Soar Interface](#soar) 
+        *   [Soar Interface](#soar)
         *   [API interface](#features)
 
 ### Pairing eBot
@@ -73,11 +73,11 @@ The following are detailed technical specifications of the eBots:
 
 ### Python Installation
 You might need:
-* [Python 2.7](http://epd-free.enthought.com/?Download=Download+EPD+Free+7.3-2) 
+* [Python 2.7](http://epd-free.enthought.com/?Download=Download+EPD+Free+7.3-2)
 
 Soar
 ---------
-This section assumes that you have Python 2.7 already installed. 
+This section assumes that you have Python 2.7 already installed.
 To install Digital World Library, follow the steps according to your platform:
 
 **OS X and Linux:**
@@ -92,11 +92,11 @@ To install Digital World Library, follow the steps according to your platform:
     tar SOAR-master.zip
 ```
    * Go to the SOAR-master folder, e.g. type:
-```    
+```
    cd SOAR-master
 ```
    * Install the library by typing:
-```   
+```
    sudo python setup.py install
 ```
 
@@ -105,13 +105,13 @@ To install Digital World Library, follow the steps according to your platform:
 * Unzip the file
 * Open Command Prompt by typing "cmd" from the Start Menu
 * Go the directory/folder where you have unzipped the file, e.g. type :
-``` 
+```
     cd C:\Downloads\SOAR-master\
-``` 
+```
    * Install the library by typing:
-``` 
+```
    python setup.py install
-``` 
+```
 
 ### RUNNING SIMULATOR - SOAR
 After you have installed the Digital World Library, you can run the
@@ -121,14 +121,14 @@ simulator, called SOAR. To run it, follow the steps below:
    * Open Terminal
    * Go to the SOAR-master folder
    * Go to soar folder
-   * Run soar by typing: 
-``` 
-	python runsoar.py
-``` 
+   * Run soar by typing:
+```
+  python runsoar.py
+```
 **Windows:**
 * Open Command Prompt by typing "cmd" from the Start Menu
 * Go to the folder where you store Digital World Library, e.g.:
-``` 
+```
     cd C:\Downloads\SOAR-master\
 ```
 * Go to "soar" folder:
@@ -143,7 +143,7 @@ simulator, called SOAR. To run it, follow the steps below:
 ### USING SIMULATOR - SOAR
 
 1. Running the code and connect to eBot using wireless connection:
-   * Run Soar 
+   * Run Soar
    * Click "Simulator" button to load any Python files for the Worlds
    * Click "Brain" button and choose the Python files containing your robot brain
    * Click "START" button to start connection with EBot
@@ -155,3 +155,44 @@ Some World files for simulation has been created ans it is part of the Digital L
 BRAIN
 
 A simple Brain file has been included: brainfile.py.
+
+
+eBot API
+---------
+
+The user can use the eBot directly by writing a simple python code by calling the API's from the given list
+
+you can download the API from [here]()
+
+**General**
+* open() / connect(): Connects to the (first) eBot the computer is connected to
+* close()/ disconnect(): Close the comport
+* halt(): Halts the eBot, turns motors and LED off
+
+**Outputs**
+* led(bool): Turns led on, if input is 1, off if input is 0
+* wheels(Ls,Rs): Controls the wheel speed using specified values
+* buzzer(frequency, time): Plays the buzzer for given time at given frequency
+
+**Sensors**
+* robot_uS(): Returns a tuple containing all 6 ultraSonic readings in meters
+* light(): Returns a tupple containing 2 LDR readings from as 0 to 1, 1 being brightest
+* obstacle(): Reads the obstacle in front of the front sonar sensor
+Returns true if the vale is less than 250 mm
+* acceleration(): Returns the absolute value of the X,Y, theta coordinates of the robot with reference to starting position
+
+**Example**
+```
+From eBot import *
+From time import *
+eBot = eBot()
+eBot.connect()
+eBot.wheels(1,1) full forward
+sleep(1)
+eBot.wheels(0,0) Stop – can use halt as well
+sleep(0.5)
+eBot.led(1)
+eBot.wheels(-1,-1) full backward
+sleep(1)
+eBot.halt()
+```
