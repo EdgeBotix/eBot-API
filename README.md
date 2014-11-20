@@ -191,35 +191,31 @@ Pairing
 ----------
 **Windows**
 
-i. Type add Bluetooth device in the start search box 
+1. Type add Bluetooth device in the start search box 
 
-ii. A dialog window will open up as shown in figure
-
+2. A dialog window will open up as shown in figure
 ![Devices](https://github.com/EdgeBotix/docs/blob/master/images/devices.PNG)
 
-iii. Select the eBotxxx (your eBot number) and press next
+3. Select the eBotxxx (your eBot number) and press next
 
-iv. a new dialog window will open up as shown in figure and then we enter the device pairing code
-
+4. a new dialog window will open up as shown in figure and then we enter the device pairing code
 ![pairing_code](https://github.com/EdgeBotix/docs/blob/master/images/pairing_code.PNG)
 
-v. the device pairing code is 0000, enter that and press next
-
+5. the device pairing code is 0000, enter that and press next
 ![code](https://github.com/EdgeBotix/docs/blob/master/images/code.PNG)
 
-vi. we would then get a window saying the device was successfully added.
+6. we would then get a window saying the device was successfully added.
 
 **For Mac**
 
-i. Click the Bluetooth Icon on upper right corner of a Mac system.
-
+1. Click the Bluetooth Icon on upper right corner of a Mac system.
 ![mac](https://github.com/EdgeBotix/docs/blob/master/images/mac.png)
 
-ii. Click on Open Bluetooth Preferences as shown
+2. Click on Open Bluetooth Preferences as shown
 
-iii. Look for eBotxxx (your eBot number) and pair it
+3. Look for eBotxxx (your eBot number) and pair it
 
-iv. If it is doesnt connect then click on options
+4. If it is doesnt connect then click on options
 
-v. Then enter the device pairing code as 0000 and click pair.
+5. Then enter the device pairing code as 0000 and click pair.
 
