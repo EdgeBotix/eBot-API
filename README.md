@@ -57,10 +57,10 @@ The following are detailed technical specifications of the eBots:
 *	**Interface**
     * Currently there are two interface with python language
         *   [Soar Interface](#soar)
-        *   [API interface](#features)
+        *   [API interface](#api)
 
 ### Pairing eBot
-* eBot could be paired by entering the pairing code "0000". If you want the step by step guide of pairing with your system you can click [here](#Pairing).
+* eBot could be paired by entering the pairing code "0000". If you want the step by step guide of pairing with your system you can click [here](#pairing).
 
 ### Python Installation
 You might need:
@@ -148,9 +148,8 @@ BRAIN
 A simple Brain file has been included: brainfile.py.
 
 
-eBot API
+API
 ---------
-
 The user can use the eBot directly by writing a simple python code by calling the API's from the given list
 
 you can download the API from [here](https://github.com/EdgeBotix/eBot-API/)
@@ -189,7 +188,7 @@ eBot.halt()
 ```
 
 Pairing
---------
+----------
 **Windows**
 
 i. Type add Bluetooth device in the start search box 
