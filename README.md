@@ -1,11 +1,9 @@
 eBot-API
 ========
  
- | title | Description          | author | tags  | created | modified   |
- 
- | ------------- | ----------- | ----------- | ----------- | ----------- | ----------- |
- 
- | Getting started with eBot     | eBot hardware and Soar code |  Abhishek Gupta, Harsh Bhatt | eBot, Soar, Edgebotix | 2014 Oct 20 | 2014 Nov 20 |
+ | title | Description          | author: |tags: |created:|modified:|
+ | ------------- | ----------- |----------- |----------- |----------- |----------- |
+ | Getting started with eBot     | eBot hardware and Soar code|Abhishek Gupta, Harsh Bhatt |eBot, Soar, Edgebotix |2014 Oct 20 |2014 Nov 20 |
 
 Getting Started with eBot
 =========
@@ -62,7 +60,7 @@ The following are detailed technical specifications of the eBots:
         *   [API interface](#features)
 
 ### Pairing eBot
-* eBot could be paired by entering the pairing code "0000". If you want the step by step guide of pairing with your system you can click [here](#detailed pairing).
+* eBot could be paired by entering the pairing code "0000". If you want the step by step guide of pairing with your system you can click [here](#Pairing).
 
 ### Python Installation
 You might need:
@@ -189,3 +187,40 @@ eBot.wheels(-1,-1) full backward
 sleep(1)
 eBot.halt()
 ```
+
+Pairing
+--------
+**Windows**
+
+i. Type add Bluetooth device in the start search box 
+
+ii. A dialog window will open up as shown in figure
+
+![Devices](https://github.com/EdgeBotix/docs/blob/master/images/devices.PNG)
+
+iii. Select the eBotxxx (your eBot number) and press next
+
+iv. a new dialog window will open up as shown in figure and then we enter the device pairing code
+
+![pairing_code](https://github.com/EdgeBotix/docs/blob/master/images/pairing_code.PNG)
+
+v. the device pairing code is 0000, enter that and press next
+
+![code](https://github.com/EdgeBotix/docs/blob/master/images/code.PNG)
+
+vi. we would then get a window saying the device was successfully added.
+
+**For Mac**
+
+i. Click the Bluetooth Icon on upper right corner of a Mac system.
+
+![mac](https://github.com/EdgeBotix/docs/blob/master/images/mac.png)
+
+ii. Click on Open Bluetooth Preferences as shown
+
+iii. Look for eBotxxx (your eBot number) and pair it
+
+iv. If it is doesnt connect then click on options
+
+v. Then enter the device pairing code as 0000 and click pair.
+
