@@ -257,7 +257,30 @@ class eBot:
 
     #TODO: implement temperature feedback from MPU6050 IC
     def temperature(self):
-        pass
+        if self.serialReady:
+            try:
+                self.port.write("2T")
+            except:
+                self.lostConnection()
+        line = self.port.readline()
+        return line
+    def imeprial_march(self):
+        if self.serialReady:
+            try:
+                self.port.write("2b")
+            except:
+                self.lostConnection()
+    def buzzer(self, btime, bfreq):
+        buzzer_time = int(btime)
+        buzzer_frequency = int(bfreq)
+        bt1 = str(buzzer_time)
+        bf1 = str(buzzer_frequency)
+        myvalue = '9' + 'B' + bt1 + ';' + bf1
+        if self.serialReady:
+            try:
+                self.port.write(myvalue)
+            except:
+                self.lostConnection()
 
     def port_name(self):
         return self.port
