@@ -18,9 +18,10 @@ if os.name == 'nt':
 class eBot:
     def __init__(self):
         self.sonarValues = [0, 0, 0, 0, 0, 0]
+        self.all_Values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.port = None
         self.serialReady = False
-
+        self.ldrvalue = [0, 0]
     def destroy(self):
         self.disconnect()
         self.sonarValues = None
@@ -184,6 +185,34 @@ class eBot:
         self.sonarValues[5] = float(values[5]) / 1000
         return self.sonarValues
 
+    def calibration_values(self):
+        if self.serialReady:
+            try:
+                self.port.write("2C")
+            except:
+                self.lostConnection()
+        line = self.port.readline()
+        values = line.split(";")
+        while len(values) < 10:
+            if self.serialReady:
+                try:
+                    self.port.write("2C")
+                except:
+                    self.lostConnection()
+            line = self.port.readline()
+            values = line.split(";")
+        self.all_Values[0] = float(values[0])
+        self.all_Values[1] = float(values[1])
+        self.all_Values[2] = float(values[2])
+        self.all_Values[3] = float(values[3])
+        self.all_Values[8] = float(values[4]) / 1000
+        self.all_Values[7] = float(values[5]) / 1000
+        self.all_Values[6] = float(values[6]) / 1000
+        self.all_Values[5] = float(values[7]) / 1000
+        self.all_Values[4] = float(values[8]) / 1000
+        self.all_Values[9] = float(values[9]) / 1000
+        return self.all_Values
+
     def halt(self):
         if self.serialReady:
             try:
@@ -225,9 +254,9 @@ class eBot:
                 self.lostConnection()
         line = self.port.readline()
         values = line.split(";")
-        float(values[0])
-        float(values[1])
-        return values
+        self.ldrvalue[0] = float(values[0])
+        self.ldrvalue[1] = float(values[1])
+        return self.ldrvalue
 
     #Double check true vs. false
     def obstacle(self):
