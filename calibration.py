@@ -1,4 +1,4 @@
-from eBot import *
+YOfrom eBot import *
 import time
 #Create new instance of eBot - connects to first eBot the computer is connected to
 myEBot = eBot()

@@ -24,7 +24,7 @@ for i in range(1, 1000, 1):
     if sonars[2] < 0.300:
         myEBot.halt()
     else:
-        myEBot.wheels(1, 1)
+        myEBot.wheels(0, 0)
     print sonars
 
 myEBot.halt()

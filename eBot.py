@@ -22,6 +22,7 @@ class eBot:
         self.port = None
         self.serialReady = False
         self.ldrvalue = [0, 0]
+        self.p_value = [0, 0]
     def destroy(self):
         self.disconnect()
         self.sonarValues = None
@@ -62,7 +63,8 @@ class eBot:
         if os.name == "posix":
             if sys.platform == "linux2":
                 #usbSerial = glob.glob('/dev/ttyUSB*')
-                print "Support for this OS is under development."
+                ports = glob.glob('/dev/tty.eBot*')
+                #print "Support for this OS is under development."
             elif sys.platform == "darwin":
                 ports = glob.glob('/dev/tty.eBot*')
                 #usbSerial = glob.glob('/dev/tty.usbserial*')
@@ -77,8 +79,11 @@ class eBot:
         connect = 0
         ebot_ports = []
         ebot_names = []
+        line = "a"
         for port in ports:
             try:
+                if (line[:4] == "eBot"):
+                    break
                 s = Serial(port, baudRate, timeout=1.0, writeTimeout=1.0)
                 s._timeout = 1.0
                 s._writeTimeout = 1.0
@@ -86,20 +91,22 @@ class eBot:
                 #    s.open()
                 #except:
                 #    continue
-                s.write("<<1?")
-                sleep(0.5)
-                line = s.readline()
-                if (line[:4] == "eBot"):
-                    ebot_ports.append(port)
-                    ebot_names.append(line)
-                    connect = 1
-                    self.port = s
-                    self.portName = port
-                    self.port._timeout = 1.0
-                    self.port._writeTimeout = 1.0
-                    self.port.flushInput()
-                    self.port.flushOutput()
-                    break
+
+                while (line[:4] != "eBot"):
+                    s.write("<<1?")
+                    sleep(0.5)
+                    line = s.readline()
+                    if (line[:4] == "eBot"):
+                        ebot_ports.append(port)
+                        ebot_names.append(line)
+                        connect = 1
+                        self.port = s
+                        self.portName = port
+                        self.port._timeout = 1.0
+                        self.port._writeTimeout = 1.0
+                        self.port.flushInput()
+                        self.port.flushOutput()
+                        break
                     #s.close()
                 #                    self.
             except:
@@ -130,7 +137,7 @@ class eBot:
             line = self.port.readline()
             if (line != ">>1B\n" and line != ">>1B"):
                 self.lostConnection()
-            self.port.write("EEEO")
+            self.port.write("<<1O")
             sleep(0.4)
             self.port.write("F")
             sleep(0.2)
@@ -151,7 +158,6 @@ class eBot:
 
     #TODO: add disconnect feedback to robot
     def disconnect(self):
-        self.halt()
         if self.serialReady:
             try:
                 self.port.close()
@@ -219,7 +225,6 @@ class eBot:
                 self.port.write("2H")
             except:
                 self.lostConnection()
-        self.led_off()
 
     def led(self, bool):
         if (bool == 1):
@@ -292,7 +297,23 @@ class eBot:
             except:
                 self.lostConnection()
         line = self.port.readline()
-        return line
+        t_value = line.split(";")
+        if len(t_value) < 2:
+            return 0
+        else:
+            return int(t_value[0])
+    def power(self):
+        if self.serialReady:
+            try:
+                self.port.write("2V")
+            except:
+                self.lostConnection()
+        line = self.port.readline()
+        t_values = line.split(";")
+        self.p_value[0] = float(t_values[0])
+        self.p_value[1] = float(t_values[1])
+        return self.p_value
+
     def imeprial_march(self):
         if self.serialReady:
             try:
