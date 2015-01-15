@@ -23,6 +23,7 @@ class eBot:
         self.serialReady = False
         self.ldrvalue = [0, 0]
         self.p_value = [0, 0]
+        self.acc_values = [0,0,0]
     def destroy(self):
         self.disconnect()
         self.sonarValues = None
@@ -63,10 +64,10 @@ class eBot:
         if os.name == "posix":
             if sys.platform == "linux2":
                 #usbSerial = glob.glob('/dev/ttyUSB*')
-                ports = glob.glob('/dev/tty.eBot*')
+                ports = glob.glob('/dev/tty.eBo*')
                 #print "Support for this OS is under development."
             elif sys.platform == "darwin":
-                ports = glob.glob('/dev/tty.eBot*')
+                ports = glob.glob('/dev/tty.eBo*')
                 #usbSerial = glob.glob('/dev/tty.usbserial*')
             else:
                 print "Unknown posix OS."
@@ -284,10 +285,10 @@ class eBot:
                 self.lostConnection()
         line = self.port.readline()
         values = line.split(";")
-        float(values[0])
-        float(values[1])
-        float(values[2])
-        return values
+        self.acc_values[0] = float(values[0])
+        self.acc_values[1] = float(values[1])
+        self.acc_values[2] = float(values[2])
+        return self.acc_values
 
     #TODO: implement temperature feedback from MPU6050 IC
     def temperature(self):
