@@ -7,17 +7,17 @@ myEBot.connect()
 sonars = [0, 0, 0, 0]
 myEBot.halt()
 while True:
-    myEBot.wheels(0.2, -0.2)
+    myEBot.wheels(-1, 1)
     now_time = time()
-    sonars1 = myEBot.acceleration()
-    initial_heading= sonars1[2]
-    while initial_heading - sonars[2] < 90:
-        sonars = myEBot.acceleration()
+    sonars1 = myEBot.position()
+    initial_heading = sonars1[2]
+    while -initial_heading + sonars[2] < 55:
+        sonars = myEBot.position()
         print sonars
     myEBot.wheels(0, 0)
     now_time = time()
-    while time() - now_time < 3:
-        sonars = myEBot.acceleration()
+    while time() - now_time < 5:
+        sonars = myEBot.position()
         print sonars
 myEBot.halt()
 myEBot.close()
