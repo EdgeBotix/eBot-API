@@ -3,4 +3,4 @@ serial/serialutil.pyc
 serial/serialwin32.pyc
 serial/__init__.pyc
 test sonars.py
-eBot.pyc
+*.pyc
