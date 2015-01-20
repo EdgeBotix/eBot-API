@@ -23,7 +23,8 @@ class eBot:
         self.serialReady = False
         self.ldrvalue = [0, 0]
         self.p_value = [0, 0]
-        self.acc_values = [0,0,0]
+        self.acc_values = [0, 0, 0, 0, 0, 0]
+        self.pos_values = [0, 0, 0]
     def destroy(self):
         self.disconnect()
         self.sonarValues = None
@@ -159,6 +160,7 @@ class eBot:
 
     #TODO: add disconnect feedback to robot
     def disconnect(self):
+        sleep(1)
         if self.serialReady:
             try:
                 self.port.close()
@@ -288,8 +290,22 @@ class eBot:
         self.acc_values[0] = float(values[0])
         self.acc_values[1] = float(values[1])
         self.acc_values[2] = float(values[2])
+        self.acc_values[3] = float(values[3])
+        self.acc_values[4] = float(values[4])
+        self.acc_values[5] = float(values[5])
         return self.acc_values
-
+    def position(self):
+        if self.serialReady:
+            try:
+                self.port.write("2P")
+            except:
+                self.lostConnection()
+        line = self.port.readline()
+        values = line.split(";")
+        self.pos_values[0] = float(values[0])
+        self.pos_values[1] = float(values[1])
+        self.pos_values[2] = float(values[2])
+        return self.pos_values
     #TODO: implement temperature feedback from MPU6050 IC
     def temperature(self):
         if self.serialReady:
@@ -315,7 +331,7 @@ class eBot:
         self.p_value[1] = float(t_values[1])
         return self.p_value
 
-    def imeprial_march(self):
+    def imperial_march(self):
         if self.serialReady:
             try:
                 self.port.write("2b")
@@ -326,12 +342,15 @@ class eBot:
         buzzer_frequency = int(bfreq)
         bt1 = str(buzzer_time)
         bf1 = str(buzzer_frequency)
-        myvalue = '9' + 'B' + bt1 + ';' + bf1
+        str_len = len(bt1) + len(bf1)+2
+        str_len =str_len + 48
+        myvalue = chr(str_len) + 'B' + bt1 + ';' + bf1
         if self.serialReady:
             try:
                 self.port.write(myvalue)
             except:
                 self.lostConnection()
+        sleep(buzzer_time/1000)
 
     def port_name(self):
         return self.port
