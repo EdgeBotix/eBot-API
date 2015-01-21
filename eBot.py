@@ -38,6 +38,7 @@ class eBot:
     def getOpenPorts(self):
         """
         Windows only function: Obtains a list of tuples with eBot-relevant port number and description.
+
         :rtype: list
         :return: devicePorts: list of port numbers and descriptions of relevant serial devices.
         """
@@ -65,6 +66,7 @@ class eBot:
     def open(self):
         """
         Opens connection with the eBot via BLE. Connects with the first eBot that the computer is paired to.
+
         :raise Exception: No eBot found
         """
         self.connect()
@@ -72,6 +74,7 @@ class eBot:
     def connect(self):
         """
         Opens connection with the eBot via BLE. Connects with the first eBot that the computer is paired to.
+
         :raise Exception: No eBot found
         """
         baudRate = 115200
@@ -193,6 +196,7 @@ class eBot:
     def robot_uS(self):
         """
         Retrieves and returns all six ultrasonic sensor values from the eBot in meters.
+
         :rtype: list
         :return: sonarValues
         """
@@ -222,6 +226,7 @@ class eBot:
     def calibration_values(self):
         """
         Retrieves and returns the calibration values of the eBot.
+
         :rtype: list
         :return: all_Values (calibration values)
         """
@@ -265,6 +270,7 @@ class eBot:
     def led(self, bool):
         """
         Controls the state of the LED on the eBot.
+
         :param bool: Defines whether the LED should turn ON (1) or OFF (0)
         """
         if (bool == 1):
@@ -297,6 +303,7 @@ class eBot:
     def light(self):
         """
         Retrieves and returns a list of tuples with the light index. 0 index is front and 1st index is top LDR readings.
+
         :rtype : list
         :return: ldrvalue: LDR Readings
         """
@@ -315,6 +322,7 @@ class eBot:
     def obstacle(self):
         """
         Tells whether or not there is an obstacle less than 250 mm away from the front of the eBot.
+
         :rtype: bool
         :return: True if obstacle exists
         """
@@ -333,6 +341,7 @@ class eBot:
         """
         Retrieves and returns accelerometer values; absolute values of X,Y and theta coordinates of robot with reference
         to starting position.
+
         :rtype: list
         :return: acc_values: Accelerometer values
         """
@@ -354,6 +363,7 @@ class eBot:
     def position(self):
         """
         Retrieves and returns position values of the eBot.
+
         :rtype: list
         :return: pos_values: X,Y,Z position values
         """
@@ -373,6 +383,7 @@ class eBot:
     def temperature(self):
         """
         Retrieves and returns temperature reading from the eBot.
+
         :rtype: int
         :return: Temperature value.
         """
@@ -417,6 +428,7 @@ class eBot:
     def buzzer(self, btime, bfreq):
         """
         Plays the buzzer for given time at given frequency.
+
         :param btime: Time in Seconds
         :param bfreq: Frequency in Hertz
         """
@@ -437,6 +449,7 @@ class eBot:
     def port_name(self):
         """
         Returns port name of currently connected eBot.
+
         :return: port: Port name
         """
         return self.port
@@ -445,6 +458,7 @@ class eBot:
     def port_close(self):
         """
         Closes the COM port that corresponds to the eBot object.
+
         :raise Exception: Could not close COM port
         """
         try:
@@ -463,6 +477,7 @@ class eBot:
     def wheels(self, LS, RS):
         """
         Controls the speed of the wheels of the robot according to the specified values
+
         :param LS: Speed of left motor
         :param RS: Speed of right motor
         """
@@ -484,6 +499,7 @@ class eBot:
     def lostConnection(self):
         """
         Handler for the case that the computer loses connection with the eBot
+
         :raise Exception: Robot Connection Lost
         """
         try:
