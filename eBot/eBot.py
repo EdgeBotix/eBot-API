@@ -304,7 +304,7 @@ class eBot:
         """
         Retrieves and returns a list of tuples with the light index. 0 index is front and 1st index is top LDR readings.
 
-        :rtype : list
+        :rtype: list
         :return: ldrvalue: LDR Readings
         """
         if self.serialReady:
@@ -498,7 +498,7 @@ class eBot:
 
     def lostConnection(self):
         """
-        Handler for the case that the computer loses connection with the eBot
+        Handler for the case that the computer loses connection with the eBot.
 
         :raise Exception: Robot Connection Lost
         """
