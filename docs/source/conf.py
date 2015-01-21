@@ -16,10 +16,7 @@ import sys
 import os
 import sphinx_rtd_theme
 
-print os.path.abspath("../../")
-# print os.path.split(os.path.abspath(dir))[0]
-# print sys.path
-sys.path.append(os.path.abspath('../../'))
+sys.path.append(os.path.abspath('../../eBot/'))
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
