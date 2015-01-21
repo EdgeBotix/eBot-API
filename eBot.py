@@ -25,7 +25,11 @@ class eBot:
         self.p_value = [0, 0]
         self.acc_values = [0, 0, 0, 0, 0, 0]
         self.pos_values = [0, 0, 0]
+
     def destroy(self):
+        """
+        Destructor function for eBot class.
+        """
         self.disconnect()
         self.sonarValues = None
         self.port = None
@@ -33,7 +37,9 @@ class eBot:
 
     def getOpenPorts(self):
         """
-            This Function Returns a list of tuples with the port number and its description. Used for Windows only
+        Windows only function: Obtains a list of tuples with eBot-relevant port number and description.
+        :rtype: list
+        :return: devicePorts: list of port numbers and descriptions of relevant serial devices.
         """
         path = 'HARDWARE\\DEVICEMAP\\SERIALCOMM'
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, path)
@@ -57,9 +63,17 @@ class eBot:
         return devicePorts
 
     def open(self):
+        """
+        Opens connection with the eBot via BLE. Connects with the first eBot that the computer is paired to.
+        :raise Exception: No eBot found
+        """
         self.connect()
 
     def connect(self):
+        """
+        Opens connection with the eBot via BLE. Connects with the first eBot that the computer is paired to.
+        :raise Exception: No eBot found
+        """
         baudRate = 115200
         ports = []
         if os.name == "posix":
@@ -156,10 +170,16 @@ class eBot:
         self.serialReady = True
 
     def close(self):
+        """
+        Close BLE connection with eBot.
+        """
         self.disconnect()
 
     #TODO: add disconnect feedback to robot
     def disconnect(self):
+        """
+        Close BLE connection with eBot.
+        """
         sleep(1)
         if self.serialReady:
             try:
@@ -171,6 +191,11 @@ class eBot:
                 self.lostConnection()
 
     def robot_uS(self):
+        """
+        Retrieves and returns all six ultrasonic sensor values from the eBot in meters.
+        :rtype: list
+        :return: sonarValues
+        """
         if self.serialReady:
             try:
                 self.port.write("2S")
@@ -195,6 +220,11 @@ class eBot:
         return self.sonarValues
 
     def calibration_values(self):
+        """
+        Retrieves and returns the calibration values of the eBot.
+        :rtype: list
+        :return: all_Values (calibration values)
+        """
         if self.serialReady:
             try:
                 self.port.write("2C")
@@ -223,6 +253,9 @@ class eBot:
         return self.all_Values
 
     def halt(self):
+        """
+        Halts the eBot, turns the motors and LEDs off.
+        """
         if self.serialReady:
             try:
                 self.port.write("2H")
@@ -230,6 +263,10 @@ class eBot:
                 self.lostConnection()
 
     def led(self, bool):
+        """
+        Controls the state of the LED on the eBot.
+        :param bool: Defines whether the LED should turn ON (1) or OFF (0)
+        """
         if (bool == 1):
             self.led_on()
         elif (bool == 0):
@@ -238,6 +275,9 @@ class eBot:
             self.led_off()
 
     def led_on(self):
+        """
+        Turns the LED on the eBot ON.
+        """
         if self.serialReady:
             try:
                 self.port.write("2L")
@@ -245,6 +285,9 @@ class eBot:
                 self.lostConnection()
 
     def led_off(self):
+        """
+        Turns the LED on the eBot OFF.
+        """
         if self.serialReady:
             try:
                 self.port.write("2l")
@@ -253,7 +296,9 @@ class eBot:
 
     def light(self):
         """
-            This function returns a list of tuples with the light index. 0 index is front and 1st index is top LDR readings
+        Retrieves and returns a list of tuples with the light index. 0 index is front and 1st index is top LDR readings.
+        :rtype : list
+        :return: ldrvalue: LDR Readings
         """
         if self.serialReady:
             try:
@@ -268,6 +313,11 @@ class eBot:
 
     #Double check true vs. false
     def obstacle(self):
+        """
+        Tells whether or not there is an obstacle less than 250 mm away from the front of the eBot.
+        :rtype: bool
+        :return: True if obstacle exists
+        """
         if self.serialReady:
             try:
                 self.port.write("2O")
@@ -280,6 +330,12 @@ class eBot:
 
     #TODO: implement x, y, z returns and a seperate odometry function
     def acceleration(self):
+        """
+        Retrieves and returns accelerometer values; absolute values of X,Y and theta coordinates of robot with reference
+        to starting position.
+        :rtype: list
+        :return: acc_values: Accelerometer values
+        """
         if self.serialReady:
             try:
                 self.port.write("2A")
@@ -294,7 +350,13 @@ class eBot:
         self.acc_values[4] = float(values[4])
         self.acc_values[5] = float(values[5])
         return self.acc_values
+
     def position(self):
+        """
+        Retrieves and returns position values of the eBot.
+        :rtype: list
+        :return: pos_values: X,Y,Z position values
+        """
         if self.serialReady:
             try:
                 self.port.write("2P")
@@ -306,8 +368,14 @@ class eBot:
         self.pos_values[1] = float(values[1])
         self.pos_values[2] = float(values[2])
         return self.pos_values
+
     #TODO: implement temperature feedback from MPU6050 IC
     def temperature(self):
+        """
+        Retrieves and returns temperature reading from the eBot.
+        :rtype: int
+        :return: Temperature value.
+        """
         if self.serialReady:
             try:
                 self.port.write("2T")
@@ -319,7 +387,12 @@ class eBot:
             return 0
         else:
             return int(t_value[0])
+
     def power(self):
+        """
+
+        :return:
+        """
         if self.serialReady:
             try:
                 self.port.write("2V")
@@ -332,12 +405,21 @@ class eBot:
         return self.p_value
 
     def imperial_march(self):
+        """
+
+        """
         if self.serialReady:
             try:
                 self.port.write("2b")
             except:
                 self.lostConnection()
+
     def buzzer(self, btime, bfreq):
+        """
+        Plays the buzzer for given time at given frequency.
+        :param btime: Time in Seconds
+        :param bfreq: Frequency in Hertz
+        """
         buzzer_time = int(btime)
         buzzer_frequency = int(bfreq)
         bt1 = str(buzzer_time)
@@ -353,10 +435,18 @@ class eBot:
         sleep(buzzer_time/1000)
 
     def port_name(self):
+        """
+        Returns port name of currently connected eBot.
+        :return: port: Port name
+        """
         return self.port
 
 
     def port_close(self):
+        """
+        Closes the COM port that corresponds to the eBot object.
+        :raise Exception: Could not close COM port
+        """
         try:
             self.port.close()
         except:
@@ -364,11 +454,18 @@ class eBot:
             raise Exception("Could not close COM port.")
 
     #TODO: Add com port argument functionality
-    #Still under development, currently just calls connect
     def port_open(self):
+        """
+        Still under development, currently just calls connect
+        """
         self.connect()
 
     def wheels(self, LS, RS):
+        """
+        Controls the speed of the wheels of the robot according to the specified values
+        :param LS: Speed of left motor
+        :param RS: Speed of right motor
+        """
         Left_speed = int((LS + 2) * 100)
         Right_speed = int((RS + 2) * 100)
         LS1 = str(Left_speed)
@@ -385,6 +482,10 @@ class eBot:
                 # def __init__(self):
 
     def lostConnection(self):
+        """
+        Handler for the case that the computer loses connection with the eBot
+        :raise Exception: Robot Connection Lost
+        """
         try:
             self.port.close()
         except:
