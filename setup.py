@@ -2,11 +2,11 @@
 
 from distutils.core import setup
 
-setup(name='eBot',
-      version='1.0',
+setup(name='eBotAPI',
+      version='1.1',
       description='eBot Application Programming Interface',
       author='Harsh Bhatt',
-      author_email='harsh.bhatt@me.com',
+      author_email='harsh@edgebotix.com',
       # url='https://www.python.org/sigs/distutils-sig/',
-      packages=['eBot'],
+      packages=['eBot','eBot.serial'],
      )
