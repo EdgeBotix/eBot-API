@@ -99,8 +99,10 @@ class eBot:
         ebot_ports = []
         ebot_names = []
         line = "a"
+        print "connecting",
         for port in ports:
             try:
+                print ".",
                 if (line[:4] == "eBot"):
                     break
                 s = Serial(port, baudRate, timeout=1.0, writeTimeout=1.0)
@@ -266,6 +268,7 @@ class eBot:
                 self.port.write("2H")
             except:
                 self.lostConnection()
+        sleep(0.05)
 
     def led(self, bool):
         """
@@ -279,6 +282,7 @@ class eBot:
             self.led_off()
         else:
             self.led_off()
+        sleep(0.05)
 
     def led_on(self):
         """
@@ -289,6 +293,7 @@ class eBot:
                 self.port.write("2L")
             except:
                 self.lostConnection()
+        sleep(0.05)
 
     def led_off(self):
         """
@@ -299,6 +304,7 @@ class eBot:
                 self.port.write("2l")
             except:
                 self.lostConnection()
+        sleep(0.05)
 
     def light(self):
         """
@@ -495,6 +501,7 @@ class eBot:
                 # class ebot_f:
 
                 # def __init__(self):
+        sleep(0.05)
 
     def lostConnection(self):
         """
