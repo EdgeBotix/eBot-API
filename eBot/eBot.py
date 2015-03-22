@@ -164,6 +164,7 @@ class eBot:
             sleep(0.2)
             self.port.flushInput()
             self.port.flushOutput()
+            print "connected"
         except:
             window = Tkinter.Tk()
             window.wm_withdraw()
@@ -483,10 +484,17 @@ class eBot:
     def wheels(self, LS, RS):
         """
         Controls the speed of the wheels of the robot according to the specified values
-
         :param LS: Speed of left motor
         :param RS: Speed of right motor
         """
+        if LS > 1:
+            LS = 1
+        elif LS < -1:
+            LS = -1
+        if RS > 1:
+            RS = 1
+        elif RS < -1:
+            RS = -1
         Left_speed = int((LS + 2) * 100)
         Right_speed = int((RS + 2) * 100)
         LS1 = str(Left_speed)
