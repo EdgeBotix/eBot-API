@@ -103,7 +103,7 @@ class eBot:
         for port in ports:
             try:
                 print ".",
-                if (line[:4] == "eBot"):
+                if (line[:2] == "eB"):
                     break
                 s = Serial(port, baudRate, timeout=1.0, writeTimeout=1.0)
                 s._timeout = 1.0
@@ -113,11 +113,13 @@ class eBot:
                 #except:
                 #    continue
 
-                while (line[:4] != "eBot"):
+                while (line[:2] != "eB"):
+                    if (s.inWaiting()>0):
+                        line=s.readline()
                     s.write("<<1?")
                     sleep(0.5)
                     line = s.readline()
-                    if (line[:4] == "eBot"):
+                    if (line[:2] == "eB"):
                         ebot_ports.append(port)
                         ebot_names.append(line)
                         connect = 1
