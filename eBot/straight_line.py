@@ -1,5 +1,6 @@
 from eBot import *
 import time
+#test
 #Create new instance of eBot - connects to first eBot the computer is connected to
 myEBot = eBot()
 myEBot.wheels(2, 2)
