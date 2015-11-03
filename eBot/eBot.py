@@ -18,7 +18,7 @@ if os.name == 'nt':
         pass
 
 
-class eBot:
+class eBot():
     def __init__(self):
         self.sonarValues = [0, 0, 0, 0, 0, 0]
         self.all_Values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -259,18 +259,14 @@ class eBot:
                     if abs(self.Gz-self.Gz_offset)>50: # to remove the noise
                         self.heading = self.heading+sampling_time*(self.Gz-self.Gz_offset) # the integration to get the heading
                     self.heading_scaled = self.heading/130.5 #128.7
-                    self.heading_scaled = self.heading_scaled % 360.
-                    if self.heading_scaled>180:
-                        self.heading_scaled-=360
-                    elif self.heading_scaled<-180:
-                        self.heading_scaled+=360
                     self.pos_values[0],self.pos_values[1],self.pos_values[2] = \
                         self.EKF.update_state([self.heading_scaled*pi/180.,self.encoder_right/1000.,self.encoder_left/1000.],sampling_time)
-                    #if self.pos_values[2]>pi:
-                    #    self.pos_values[2]-=2*pi
-                    #elif self.pos_values[2]<-pi:
-                    #    self.pos_values[2]+=2*pi
-                    #print self.pos_values[0],self.pos_values[1],self.pos_values[2]*180./pi
+                    self.pos_values[2] = degrees(self.pos_values[2])
+                    self.pos_values[2] = self.pos_values[2] % 360
+                    if self.pos_values[2]>180:
+                        self.pos_values[2]-=360
+                    elif self.pos_values[2]<-180:
+                        self.pos_values[2]+=360
         return self.incoming
 
 
@@ -454,7 +450,7 @@ class eBot:
         #self.pos_values[0] , self.pos_values[1] = self.EKF.get_position()
         #self.pos_values[2] = self.EKF.get_heading()
         #self.pos_values[2] = 0
-        return self.pos_values[0],self.pos_values[1],self.pos_values[2]*180./pi
+        return self.pos_values[0],self.pos_values[1],self.pos_values[2]
 
     #TODO: implement temperature feedback from MPU6050 IC
     def temperature(self):
