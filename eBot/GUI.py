@@ -1,87 +1,49 @@
+import eBot
 import math
-from time import *
-import libdw.sm as sm
-from soar.io import io
-import libdw.gfx as gfx
-import libdw.util as util
-import libdw.eBotsonarDist as eBotsonarDist
+import time
+import matplotlib.pyplot as plt
+myEBot= eBot.eBot()
+myEBot.connect()
+print myEBot.power()
+plt.axis([-5, 5, -5, 5])
+plt.ion()
+plt.show()
+#myEBot.wheel_calibrate(1000,980)
 
-######################################################################
-#
-#            Brain SM
-#
-######################################################################
+def main():
 
-desiredRight = 0.7
-forwardVelocity = 0.1
-#k1 = 100
-#k2 = -97.9748
-
-#k1 = 30
-#k2 = -29.7715
-
-k1 = 100
-k2 = -98.7258
-
-#k1 = 300
-#k2 = -271.73
-
-# No additional delay
-class Sensor(sm.SM):
-    def getNextValues(self, state, inp):
-        sonars = inp.sonars
-        v = eBotsonarDist.getDistanceRight(inp.sonars)
-        return (state, v)
-
-# inp is the distance to the right
-class WallFollower(sm.SM):
-    #startState = desiredRight
-    startState = None
-    def getNextValues(self, state, inp):
-
-        if state == None:
-            state = inp
-        do = inp
-        di = desiredRight
-        e  = di - do
-        e2 = di - state
-        rvel = k1*e + k2 * e2
-        state = inp
-        if rvel > 1:
-            rvel =1
-        elif rvel <-1:
-            rvel= -1
-        sleep(0.05)
-        print inp, e, e2, rvel
-        #print "w[n]   e[n]  e[n-1]", rvel, e , e2       
-        return (state, io.Action(forwardVelocity, rvel))
-
-sensorMachine = Sensor()
-sensorMachine.name = 'sensor'
-mySM = sm.Cascade(sensorMachine, WallFollower())
-
-######################################################################
-#
-#            Running the robot
-#
-######################################################################
-def plotSonar(sonarNum):
-    robot.gfx.addDynamicPlotFunction(y=('sonar'+str(sonarNum),
-                                        lambda: 
-                                        io.SensorInput().sonars[sonarNum]))
-
-
-def setup():
-    robot.gfx = gfx.RobotGraphics(drawSlimeTrail=False)
-    robot.gfx.addStaticPlotSMProbe(y=('rightDistance', 'sensor',
-                                      'output', lambda x:x))
-    robot.behavior = mySM
-    #robot.behavior.start(traceTasks = robot.gfx.tasks())
-def brainStart():
-    robot.behavior.start(traceTasks = robot.gfx.tasks())
-def step():
-    inp = io.SensorInput()
-    robot.behavior.step(io.SensorInput()).execute()
-    io.done(robot.behavior.isDone())
-def brainStop():
-    pass
+    for i in range(0,1000):
+        sonar_values = myEBot.robot_uS()
+        if sonar_values[2] < .3:
+            myEBot.wheels(-0.5,0.5)
+        else:
+            myEBot.wheels(0.5,0.5)
+        myposition = myEBot.position()
+        sonar_values = myEBot.robot_uS()
+        if 0.19 <sonar_values[2] < 0.8:
+            obstacle_x = -myposition[1] + sonar_values[2]*math.cos((myposition[2]+90)*math.pi/180)
+            obstacle_y = myposition[0] + sonar_values[2]*math.sin((myposition[2]+90)*math.pi/180)
+        else:
+            obstacle_x =1000
+            obstacle_y =1000
+        if 0.19 < sonar_values[0] < 2.4:
+            obstacle_x1 = -myposition[1] + sonar_values[0]*math.cos((myposition[2]+180)*math.pi/180)
+            obstacle_y1 = myposition[0] + sonar_values[0]*math.sin((myposition[2]+180)*math.pi/180)
+        else:
+            obstacle_x1 =1000
+            obstacle_y1 =1000
+        if 0.19 < sonar_values[4] < 2.4:
+            obstacle_x2 = -myposition[1] + sonar_values[4]*math.cos((myposition[2])*math.pi/180)
+            obstacle_y2 = myposition[0] + sonar_values[4]*math.sin((myposition[2])*math.pi/180)
+        else:
+            obstacle_x2 =1000
+            obstacle_y2 =1000
+        print sonar_values
+        plt.scatter(obstacle_x,obstacle_y, color='blue')
+        plt.scatter(obstacle_x1,obstacle_y1, color='blue')
+        plt.scatter(obstacle_x2,obstacle_y2, color='blue')
+        plt.scatter(-myposition[1],myposition[0], color = 'red')
+        plt.draw()
+        time.sleep(0.05)
+    myEBot.halt()
+main()

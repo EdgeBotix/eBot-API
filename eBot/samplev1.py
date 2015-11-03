@@ -1,14 +1,22 @@
 from eBot import *
-#Create new instance of eBot - connects to first eBot the computer is connected to
+import time
 myEBot = eBot()
-
 myEBot.connect()
 print myEBot.power()
-print myEBot.temperature()
-print myEBot.robot_uS()
-print myEBot.light()
-myEBot.buzzer(2000,5000)
-myEBot.buzzer(1000,99)
-myEBot.imperial_march()
-sleep(1)
-myEBot.close()
+myEBot.wheel_calibrate(990,1000)
+def Movement(value,r_time):
+    wheel_speed = value
+    myEBot.wheels(wheel_speed, wheel_speed)
+    now_time = time.time()
+    while (time.time() < now_time + r_time ):
+        print (myEBot.robot_uS()).__str__().replace('[',' ').replace(']',' ')
+        #print (myEBot.position()).__str__().replace('[',' ').replace(']',' ')
+        sleep(0.05)
+    myEBot.halt()
+def main():
+    for num in range(100):
+        value =input("Enter the rotational speed of the eBot: ")
+        r_time = input("Enter the time you want eBot to rotate: ")
+        Movement(value,r_time)
+    myEBot.close()
+main()
