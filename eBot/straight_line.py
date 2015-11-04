@@ -5,18 +5,18 @@ myEBot = eBot()
 myEBot.connect()
 accel = [0, 0, 0, 0, 0, 0]
 myEBot.halt()
-myEBot.imperial_march()
+
 print myEBot.power()
-for i in range(1,3000):
+for i in range(1,300):
     if 0.25 < myEBot.robot_uS()[2] < .3:
-        myEBot.wheels(0.2,-0.2)
+        myEBot.wheels(0,0)
     elif myEBot.robot_uS()[2] < .25:
-        myEBot.wheels(0.2,-0.2)
+        myEBot.wheels(-1,-1)
     else:
-        myEBot.wheels(0.2,-0.2)
+        myEBot.wheels(1,1)
     print myEBot.position()
 myEBot.halt()
 sleep(3)
 print myEBot.position()
-
+myEBot.imperial_march()
 myEBot.close()
