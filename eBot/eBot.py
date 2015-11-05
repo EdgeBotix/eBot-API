@@ -113,9 +113,9 @@ class eBot():
                 print ".",
                 if (line[:2] == "eB"):
                     break
-                s = Serial(port, baudRate, timeout=1.0, writeTimeout=1.0)
-                s._timeout = 1.0
-                s._writeTimeout = 1.0
+                s = Serial(port, baudRate, timeout=5.0, writeTimeout=5.0)
+                s._timeout = 5.0
+                s._writeTimeout = 5.0
                 #try:
                 #    s.open()
                 #except:
@@ -133,8 +133,8 @@ class eBot():
                         connect = 1
                         self.port = s
                         self.portName = port
-                        self.port._timeout = 1.0
-                        self.port._writeTimeout = 1.0
+                        self.port._timeout = 5.0
+                        self.port._writeTimeout = 5.0
                         self.port.flushInput()
                         self.port.flushOutput()
                         break
