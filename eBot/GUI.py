@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 myEBot= eBot.eBot()
 myEBot.connect()
 print myEBot.power()
-plt.axis([-5, 5, -5, 5])
+plt.axis([-2, 2, 0, 3])
 plt.ion()
 plt.show()
 #myEBot.wheel_calibrate(1000,980)

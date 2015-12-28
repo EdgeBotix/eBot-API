@@ -1,21 +1,35 @@
-from eBot import *
-import time
-#Create new instance of eBot - connects to first eBot the computer is connected to
-myEBot = eBot()
-myEBot.connect()
-accel = [0, 0, 0, 0, 0, 0]
-myEBot.halt()
+import plotly.plotly as py
+import plotly.graph_objs as go
 
-print myEBot.power()
-for i in range(1,30):
-    if 0.25 < myEBot.robot_uS()[2] < .3:
-        myEBot.wheels(0,0)
-    elif myEBot.robot_uS()[2] < .25:
-        myEBot.wheels(0,0)
-    else:
-        myEBot.wheels(0,0)
-    print myEBot.position()
-myEBot.halt()
-sleep(3)
-print myEBot.position()
-myEBot.close()
+# Create random data with numpy
+import numpy as np
+
+N = 100
+random_x = np.linspace(0, 1, N)
+random_y0 = np.random.randn(N)+5
+random_y1 = np.random.randn(N)
+random_y2 = np.random.randn(N)-5
+
+# Create traces
+trace0 = go.Scatter(
+    x = random_x,
+    y = random_y0,
+    mode = 'lines',
+    name = 'lines'
+)
+trace1 = go.Scatter(
+    x = random_x,
+    y = random_y1,
+    mode = 'lines+markers',
+    name = 'lines+markers'
+)
+trace2 = go.Scatter(
+    x = random_x,
+    y = random_y2,
+    mode = 'markers',
+    name = 'markers'
+)
+data = [trace0, trace1, trace2]
+
+# Plot and embed in ipython notebook!
+py.iplot(data, filename='line-mode')
