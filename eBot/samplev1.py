@@ -35,13 +35,21 @@ def main():
         myEBot.wheels(-0.5,0.5)
     while (sonar_values[2] > 0.3 ):
         sonar_values = myEBot.robot_uS()
+        position = myEBot.position()
         value1 = (myEBot.robot_uS()).__str__().replace('[',' ').replace(']',' ')
         value1 = value1+ ',' + myEBot.position().__str__().replace('(',' ').replace(')',' ')+ ',' + myEBot.light().__str__().replace('[',' ').replace(']',' ')
         print value1
         data.append(value1.split(","))
-        #print (myEBot.position()).__str__().replace('[',' ').replace(']',' ')
-        myEBot.wheels(1,1)
-    myEBot.wheels(0,0)
+        error = 180 - position[2]
+        if error>180:
+            error= error-360
+        myEBot.wheels(0.8 - error/100,0.8 + error/100)
+    for i in range(1,50,1):
+        value1 = (myEBot.robot_uS()).__str__().replace('[',' ').replace(']',' ')
+        value1 = value1+ ',' + myEBot.position().__str__().replace('(',' ').replace(')',' ')+ ',' + myEBot.light().__str__().replace('[',' ').replace(']',' ')
+        print value1
+        data.append(value1.split(","))
+        myEBot.wheels(0,0)
     path = "output.csv"
     csv_writer(data, path)
     myEBot.halt()
